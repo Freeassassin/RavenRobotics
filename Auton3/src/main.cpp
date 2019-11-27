@@ -11,7 +11,7 @@
 // ---- END VEXCODE CONFIGURED DEVICES ----
 
 #include "vex.h"
-
+#include <math.h>
 using namespace vex;
 vex::controller Controller; 
 vex::motor RightDriveF(PORT8,false); 
@@ -23,6 +23,7 @@ vex::motor ScooperR(PORT2,false);
 vex::motor ArmL(PORT9, true);
 vex::motor ArmR(PORT11,false);
 
+//The function for movement of the robot straight and collection of cubes 
 void move(int seconds,int speed, bool collect = false)
 { 
   if(collect)
@@ -45,10 +46,11 @@ void move(int seconds,int speed, bool collect = false)
   RightDriveF.stop();
   LeftDriveR.stop();
   RightDriveR.stop();
-  vexDelay(200);
+  vexDelay(250);
   ScooperL.stop();
   ScooperR.stop();  
 }
+//The fucntion to orient the robot based on seconds and speed
 void turn(int seconds,int speed)
 {
   LeftDriveF.setVelocity(speed, percentUnits::pct);
@@ -65,6 +67,7 @@ void turn(int seconds,int speed)
   LeftDriveR.stop();
   RightDriveR.stop();
 }
+//The fucntion to make the robot strafe(sideways) based on time and speed
 void strafe(int seconds,int speed)
 {
   LeftDriveF.setVelocity(speed, percentUnits::pct);
@@ -81,7 +84,8 @@ void strafe(int seconds,int speed)
   LeftDriveR.stop();
   RightDriveR.stop();
 }
-void open()
+//The function to fully expand the robot
+void expand()
 {
   ArmL.setVelocity(90, percentUnits::pct);
   ArmR.setVelocity(90, percentUnits::pct);
@@ -98,8 +102,10 @@ void open()
   ArmL.stop();
   ArmR.stop();   
 }
+//The fucntion to Stack the Cubes
 void stack()
 {
+
 /*  
   ArmL.setVelocity(55, percentUnits::pct);
   ArmR.setVelocity(55, percentUnits::pct);
@@ -109,44 +115,37 @@ void stack()
   ArmL.stop();
   ArmR.stop();
 */
-  int i = 0;
-  while(i <50)
+  double i = 0;
+  while(i <18)
   {
     
-    ArmL.setVelocity(-12*(i^2)+50, percentUnits::pct);
-    ArmR.setVelocity(-12*(i^2)+50, percentUnits::pct);
-    ArmL.spin(directionType::fwd);
-    ArmR.spin(directionType::fwd);
-    vexDelay(25);
-    i +=1;    
+    ArmL.setVelocity(-0.2*(pow(i,2))+70, percentUnits::pct);
+    ArmR.setVelocity(-0.2*(pow(i,2))+70, percentUnits::pct);
+    ArmL.spin(directionType::rev);
+    ArmR.spin(directionType::rev);
+    vexDelay(155);
+    i += 1;    
   }
   ArmL.stop();
   ArmR.stop();
 }
-int main() {
+int main() { 
   // Initializing Robot Configuration. DO NOT REMOVE!
   vexcodeInit();
-  //open();
-/*
-  move(2300, 50, true);
-  move(1100, -70);
-  turn(1100, 70);
-  move(1100, 80);
-  stack();
-  move(500, -100);
-*/
-/*
-  move(2300, 50, true);
+  // Expand the Robot
+  //expand(); //2800
+
+  move(1850, 60, true);
   move(1000, -90);
   strafe(1100, -70);
-  move(1900, 50, true);
-  move(800, -90);
+  move(1500, 60, true);
+  move(600, -90,true);
   strafe(1300, 70);
   turn(1100, 70);
-  move(900, 70);
-  stack();
+  move(1200, 70);
+  stack(); //2880
   move(500, -100);
-*/
-  //stack();
+
+
 
 }
