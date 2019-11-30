@@ -432,6 +432,7 @@ void usercontrol(void)
       ScooperL.stop();
       ScooperR.stop();
     }
+    
     if (Controller.ButtonUp.pressing())
     {
       double i = 0;
