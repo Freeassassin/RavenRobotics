@@ -99,7 +99,7 @@ int main() {
         ArmR.setVelocity(-0.2*(pow(i,2))+70, percentUnits::pct);
         ArmL.spin(directionType::rev);
         ArmR.spin(directionType::rev);
-        vexDelay(122);
+        vexDelay(140);
         i += 1;    
       }
       ArmL.stop();

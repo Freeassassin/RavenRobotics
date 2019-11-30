@@ -53,8 +53,8 @@ void moveX(int distance,int speed, bool collect = false)
   {
     ScooperL.setVelocity(90, percentUnits::pct);
     ScooperR.setVelocity(90, percentUnits::pct);
-    ScooperL.rotateFor(-(distance+1000), rotationUnits::deg, false);
-    ScooperR.rotateFor(-(distance+1000), rotationUnits::deg, false);
+    ScooperL.rotateFor(-(distance+900), rotationUnits::deg, false);
+    ScooperR.rotateFor(-(distance+900), rotationUnits::deg, false);
   }
   LeftDriveF.setVelocity(speed, percentUnits::pct);
   RightDriveF.setVelocity(speed, percentUnits::pct);
@@ -213,12 +213,12 @@ int main() {
   move(-500, 100); 
 //degree baed
 */
-/*  
+/*  */
   //expand(); //2800
   move(1400, 60, true);// +250
   move(-1075, 90,true);// +250 
   strafe(-850, 85); 
-  turn(-75,70);
+  turn(-83,70);
   moveX(800, 60, true);// +250
   //move(-550, 90);
   //vexDelay(150);
@@ -235,6 +235,24 @@ int main() {
   ScooperR.stop();  
   stack(); //2880
   move(-500, 100);  
-*/
-
+/*  
+  move(1200, 60, true);// +250
+  turn(550, 80);
+  move(500, 60, true);// +250
+  move(-1500, 60);
+  turn(550, 80);
+  move(300, 50, true);// +250
+  turn(425, 80);
+  strafe(-250, 50);
+  move(300, 50);
+  ScooperL.setVelocity(90, percentUnits::pct);
+  ScooperR.setVelocity(90, percentUnits::pct);  
+  ScooperR.spin(directionType::fwd);  
+  ScooperL.spin(directionType::fwd);
+  vexDelay(300);
+  ScooperL.stop();
+  ScooperR.stop();  
+  stack(); //2880
+  move(-500, 100);   
+  */
 }
