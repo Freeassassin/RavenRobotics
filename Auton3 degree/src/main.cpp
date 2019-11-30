@@ -152,16 +152,6 @@ void expand()
 //The fucntion to Stack the Cubes
 void stack()
 {
-
-/*  
-  ArmL.setVelocity(55, percentUnits::pct);
-  ArmR.setVelocity(55, percentUnits::pct);
-  ArmL.spin(directionType::rev);
-  ArmR.spin(directionType::rev);
-  vexDelay(2200);
-  ArmL.stop();
-  ArmR.stop();
-*/
   double i = 0;
   while(i <18)
   {
@@ -190,30 +180,8 @@ void stack()
 int main() { 
   // Initializing Robot Configuration. DO NOT REMOVE!
   vexcodeInit();
-  // Expand the Robot
-  //expand(); //2800
-/*  
-  move(1300, 40, true);// +250
-  move(-1100, 40,true);// +250  
-  strafe(-870, 40);
-  //turn(-120,40);
-  move(800, 40, true);// +250
-  move(-600, 40);
-  strafeX(1300, 70);
-  turn(1000, 40);
-  moveT(900, 40);
-  ScooperL.setVelocity(70, percentUnits::pct);
-  ScooperR.setVelocity(70, percentUnits::pct);  
-  ScooperR.spin(directionType::fwd);  
-  ScooperL.spin(directionType::fwd);
-  vexDelay(200);
-  ScooperL.stop();
-  ScooperR.stop();
-  stack(); //2880
-  move(-500, 100); 
-//degree baed
-*/
-/*  */
+
+/* red right */
   //expand(); //2800
   move(1400, 60, true);// +250
   move(-1075, 90,true);// +250 
@@ -235,7 +203,7 @@ int main() {
   ScooperR.stop();  
   stack(); //2880
   move(-500, 100);  
-/*  
+/*  red left
   move(1200, 60, true);// +250
   turn(550, 80);
   move(500, 60, true);// +250
