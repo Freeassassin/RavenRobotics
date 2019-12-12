@@ -11,6 +11,7 @@
 // ---- END VEXCODE CONFIGURED DEVICES ----
 
 #include "vex.h"
+// Library for math to use pow() 
 #include <math.h>
 using namespace vex;
 vex::controller Controller; 
@@ -38,6 +39,7 @@ vex::motor ArmR(PORT11,false);
 /*  function is only called once after the V5 has been powered on and        */
 /*  not every time that the robot is disabled.                               */
 /*---------------------------------------------------------------------------*/
+
 //The function for movement of the robot straight and collection of cubes 
 void move(int distance,int speed, bool collect = false)
 { 
@@ -62,6 +64,7 @@ void move(int distance,int speed, bool collect = false)
   RightDriveR.stop();
 
 }
+// Movement functiono acounting for collecctd cube drag
 void moveX(int distance,int speed, bool collect = false)
 { 
   if(collect)
@@ -85,6 +88,7 @@ void moveX(int distance,int speed, bool collect = false)
   RightDriveR.stop();
 
 }
+// Movement function based on time
 void moveT(int seconds,int speed, bool collect = false)
 { 
   if(collect)
@@ -111,7 +115,7 @@ void moveT(int seconds,int speed, bool collect = false)
   ScooperL.stop();
   ScooperR.stop();  
 }
-//The fucntion to orient the robot based on seconds and speed
+//The fucntion to orient the robot based on degrees and speed
 void turn(int distance,int speed)
 {
   LeftDriveF.setVelocity(speed, percentUnits::pct);
@@ -123,7 +127,7 @@ void turn(int distance,int speed)
   LeftDriveR.rotateFor(distance, rotationUnits::deg, false);
   RightDriveR.rotateFor(-distance, rotationUnits::deg, true);  
 }
-//The fucntion to make the robot strafe(sideways) based on time and speed
+//The fucntion to make the robot strafe(sideways) based on degrees and speed
 void strafe(int distance,int speed)
 {
   LeftDriveF.setVelocity(speed, percentUnits::pct);
@@ -135,6 +139,7 @@ void strafe(int distance,int speed)
   LeftDriveR.rotateFor(-distance, rotationUnits::deg, false);
   RightDriveR.rotateFor(distance, rotationUnits::deg, true);  
 }
+// Strafe funtion with accounting for collected cube drag
 void strafeX(int distance,int speed)
 {
   LeftDriveF.setVelocity(speed, percentUnits::pct);
@@ -168,12 +173,15 @@ void expand()
 void stack()
 {
   double i = 0;
+  // While loop because I was too lazy to look up for loop syntaxt
   while(i <18)
   {
+    // Move the robot forward slightly based on an exponential function
     LeftDriveF.setVelocity(-0.08*(pow(i,2))+20, percentUnits::pct);
     RightDriveF.setVelocity(-0.08*(pow(i,2))+20, percentUnits::pct);
     LeftDriveR.setVelocity(-0.08*(pow(i,2))+20, percentUnits::pct);
     RightDriveR.setVelocity(-0.08*(pow(i,2))+20, percentUnits::pct);
+    // Lift the storage tray to stack cubes that slows down based on an exponential function
     ArmL.setVelocity(-0.2*(pow(i,2))+65, percentUnits::pct);
     ArmR.setVelocity(-0.2*(pow(i,2))+65, percentUnits::pct);
     LeftDriveF.spin(directionType::fwd);  
@@ -182,9 +190,11 @@ void stack()
     RightDriveR.spin(directionType::fwd);
     ArmL.spin(directionType::rev);
     ArmR.spin(directionType::rev);
+    // Keep every new speed for 145 miliseconds
     vexDelay(145);
     i += 1;    
   }
+  // stop all movement 
   ArmL.stop();
   ArmR.stop();
   LeftDriveF.stop();  
@@ -215,158 +225,17 @@ void autonomous(void)
   // ..........................................................................
   // Insert autonomous user code here.
   // ..........................................................................
-/*
-  ArmL.setVelocity(50, percentUnits::pct);
-  ArmR.setVelocity(50, percentUnits::pct);
-  ArmR.spin(directionType::rev);  
-  ArmL.spin(directionType::rev);
-  vexDelay(2400);
-  ArmL.stop();
-  ArmR.stop();
-  ArmL.setVelocity(60, percentUnits::pct);
-  ArmR.setVelocity(60, percentUnits::pct);
-  ArmR.spin(directionType::fwd);  
-  ArmL.spin(directionType::fwd);
-  vexDelay(2000);
-  ArmL.stop();
-  ArmR.stop();
 
-  LeftDriveF.setVelocity(50, percentUnits::pct);
-  RightDriveF.setVelocity(50, percentUnits::pct);
-  LeftDriveR.setVelocity(50, percentUnits::pct);
-  RightDriveR.setVelocity(50, percentUnits::pct);
-  ScooperL.setVelocity(90, percentUnits::pct);
-  ScooperR.setVelocity(90, percentUnits::pct); 
-c
-  ScooperL.spin(directionType::rev);
-  ScooperR.spin(directionType::rev);
-
-  vexDelay(2300);
-
-  LeftDriveF.stop();
-  RightDriveF.stop();
-  LeftDriveR.stop();
-  RightDriveR.stop();
-  vexDelay(150);
-  ScooperL.stop();
-  ScooperR.stop();
-  LeftDriveF.setVelocity(70, percentUnits::pct);
-  RightDriveF.setVelocity(70, percentUnits::pct);
-  LeftDriveR.setVelocity(70, percentUnits::pct);
-  RightDriveR.setVelocity(70, percentUnits::pct);
- 
-  LeftDriveF.spin(directionType::rev);  
-  RightDriveF.spin(directionType::rev);
-  LeftDriveR.spin(directionType::rev);
-  RightDriveR.spin(directionType::rev);
-  
-  vexDelay(1100);
-  
-  LeftDriveF.stop();
-  RightDriveF.stop();
-  LeftDriveR.stop();
-  RightDriveR.stop();
-  
-  LeftDriveF.spin(directionType::fwd);  
-  RightDriveF.spin(directionType::rev);
-  LeftDriveR.spin(directionType::fwd);
-  RightDriveR.spin(directionType::rev); 
-
-  vexDelay(1100); 
-
-  LeftDriveF.stop();
-  RightDriveF.stop();
-  LeftDriveR.stop();
-  RightDriveR.stop(); 
-
-  LeftDriveF.setVelocity(80, percentUnits::pct);
-  RightDriveF.setVelocity(80, percentUnits::pct);
-  LeftDriveR.setVelocity(80, percentUnits::pct);
-  RightDriveR.setVelocity(80, percentUnits::pct);
-  LeftDriveF.spin(directionType::fwd);  
-  RightDriveF.spin(directionType::fwd);
-  LeftDriveR.spin(directionType::fwd);
-  RightDriveR.spin(directionType::fwd);
-
-  vexDelay(1200);
-
-  LeftDriveF.stop();
-  RightDriveF.stop();
-  LeftDriveR.stop();
-  RightDriveR.stop(); 
-  vexDelay(150);
-  ScooperL.stop();
-  ScooperR.stop();   
-
-  ArmL.setVelocity(68, percentUnits::pct);
-  ArmR.setVelocity(68, percentUnits::pct);
-  ArmL.spin(directionType::rev);
-  ArmR.spin(directionType::rev);
-  vexDelay(2000);
-  ArmL.stop();
-  ArmR.stop();
-  LeftDriveF.setVelocity(10, percentUnits::pct);
-  RightDriveF.setVelocity(10, percentUnits::pct);
-  LeftDriveF.spin(directionType::fwd);  
-  RightDriveF.spin(directionType::fwd);
-  vexDelay(300);
-  LeftDriveF.stop();
-  RightDriveF.stop();
-  LeftDriveF.setVelocity(100, percentUnits::pct);
-  RightDriveF.setVelocity(100, percentUnits::pct);
-  LeftDriveR.setVelocity(100, percentUnits::pct);
-  RightDriveR.setVelocity(100, percentUnits::pct);  
-  LeftDriveF.spin(directionType::rev);
-  LeftDriveR.spin(directionType::rev);
-  RightDriveF.spin(directionType::rev);
-  RightDriveR.spin(directionType::rev);
-  vexDelay(500);
-
-  LeftDriveF.stop();
-  RightDriveF.stop();
-  LeftDriveR.stop();
-  RightDriveR.stop();
-*/ 
-/*
-  expand(); //2800
-  move(1400, 60, true);// +250
-  move(-1075, 90,true);// +250 
-  strafe(-850, 85); 
-  turn(-83,70);
-  moveX(800, 60, true);// +250
-  turn(880, 80);
-  moveT(1400, 80);
-  ScooperL.setVelocity(90, percentUnits::pct);
-  ScooperR.setVelocity(90, percentUnits::pct);  
-  ScooperR.spin(directionType::fwd);  
-  ScooperL.spin(directionType::fwd);
-  vexDelay(300);
-  ScooperL.stop();
-  ScooperR.stop();  
-  stack(); //2610
-  move(-500, 100);
-*/
   expand(); //2800
   move(1400, 60, true);// +250
   move(-1075, 80,true);// +250 
-  //turn(-935, 80);
-  //moveT(550, 60);
-  //ScooperL.setVelocity(90, percentUnits::pct);
-  //ScooperR.setVelocity(90, percentUnits::pct);  
-  //ScooperR.spin(directionType::fwd);  
-  //ScooperL.spin(directionType::fwd);
-  //vexDelay(300);
-  //ScooperL.stop();
-  //ScooperR.stop();  
-  //stack(); //2610
-  //move(-500, 100); 
-/*  */
   vexDelay(150);
   strafe(-900, 85); 
   turn(-83,70);
   moveX(600, 60, true);// +250
   turn(875, 80);
   moveT(1000, 80,true);
+  // Bring cubes down
   ScooperL.setVelocity(60, percentUnits::pct);
   ScooperR.setVelocity(60, percentUnits::pct);  
   ScooperR.spin(directionType::fwd);  
@@ -436,12 +305,6 @@ void usercontrol(void)
       ArmL.spin(directionType::fwd);
       ArmR.spin(directionType::fwd);
     }
-
-
-
-
-
-
     //Collecter Controls
     if (Controller.ButtonR1.pressing())
     {

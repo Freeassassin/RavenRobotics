@@ -11,10 +11,12 @@
 // ---- END VEXCODE CONFIGURED DEVICES ----
 
 #include "vex.h"
+// Library for math to use pow() 
 #include <math.h>
 using namespace vex;
 vex::controller Controller; 
 //vex::brain       Brain;
+
 
 // A global instance of competition
 competition Competition;
@@ -37,6 +39,8 @@ vex::motor ArmR(PORT11,false);
 /*  function is only called once after the V5 has been powered on and        */
 /*  not every time that the robot is disabled.                               */
 /*---------------------------------------------------------------------------*/
+
+//The function for movement of the robot straight and collection of cubes 
 void move(int distance,int speed, bool collect = false)
 { 
   if(collect)
@@ -60,6 +64,7 @@ void move(int distance,int speed, bool collect = false)
   RightDriveR.stop();
 
 }
+// Movement functiono acounting for collecctd cube drag
 void moveX(int distance,int speed, bool collect = false)
 { 
   if(collect)
@@ -83,6 +88,7 @@ void moveX(int distance,int speed, bool collect = false)
   RightDriveR.stop();
 
 }
+// Movement function based on time
 void moveT(int seconds,int speed, bool collect = false)
 { 
   if(collect)
@@ -109,7 +115,7 @@ void moveT(int seconds,int speed, bool collect = false)
   ScooperL.stop();
   ScooperR.stop();  
 }
-//The fucntion to orient the robot based on seconds and speed
+//The fucntion to orient the robot based on degrees and speed
 void turn(int distance,int speed)
 {
   LeftDriveF.setVelocity(speed, percentUnits::pct);
@@ -121,7 +127,7 @@ void turn(int distance,int speed)
   LeftDriveR.rotateFor(distance, rotationUnits::deg, false);
   RightDriveR.rotateFor(-distance, rotationUnits::deg, true);  
 }
-//The fucntion to make the robot strafe(sideways) based on time and speed
+//The fucntion to make the robot strafe(sideways) based on degrees and speed
 void strafe(int distance,int speed)
 {
   LeftDriveF.setVelocity(speed, percentUnits::pct);
@@ -133,6 +139,7 @@ void strafe(int distance,int speed)
   LeftDriveR.rotateFor(-distance, rotationUnits::deg, false);
   RightDriveR.rotateFor(distance, rotationUnits::deg, true);  
 }
+// Strafe funtion with accounting for collected cube drag
 void strafeX(int distance,int speed)
 {
   LeftDriveF.setVelocity(speed, percentUnits::pct);
@@ -166,12 +173,15 @@ void expand()
 void stack()
 {
   double i = 0;
+  // While loop because I was too lazy to look up for loop syntaxt
   while(i <18)
   {
+    // Move the robot forward slightly based on an exponential function
     LeftDriveF.setVelocity(-0.08*(pow(i,2))+20, percentUnits::pct);
     RightDriveF.setVelocity(-0.08*(pow(i,2))+20, percentUnits::pct);
     LeftDriveR.setVelocity(-0.08*(pow(i,2))+20, percentUnits::pct);
     RightDriveR.setVelocity(-0.08*(pow(i,2))+20, percentUnits::pct);
+    // Lift the storage tray to stack cubes that slows down based on an exponential function
     ArmL.setVelocity(-0.2*(pow(i,2))+65, percentUnits::pct);
     ArmR.setVelocity(-0.2*(pow(i,2))+65, percentUnits::pct);
     LeftDriveF.spin(directionType::fwd);  
@@ -180,9 +190,11 @@ void stack()
     RightDriveR.spin(directionType::fwd);
     ArmL.spin(directionType::rev);
     ArmR.spin(directionType::rev);
+    // Keep every new speed for 145 miliseconds
     vexDelay(145);
     i += 1;    
   }
+  // stop all movement 
   ArmL.stop();
   ArmR.stop();
   LeftDriveF.stop();  
