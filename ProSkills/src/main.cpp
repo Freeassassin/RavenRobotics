@@ -13,8 +13,7 @@
 #include "vex.h"
 #include <math.h>
 using namespace vex;
-vex::controller Controller;
-
+vex::controller Controller; 
 
 // A global instance of competition
 competition Competition;
@@ -37,15 +36,14 @@ vex::motor ArmR(PORT11,false);
 /*  function is only called once after the V5 has been powered on and        */
 /*  not every time that the robot is disabled.                               */
 /*---------------------------------------------------------------------------*/
-//The function for movement of the robot straight and collection of cubes 
 void move(int distance,int speed, bool collect = false)
 { 
   if(collect)
   {
     ScooperL.setVelocity(90, percentUnits::pct);
     ScooperR.setVelocity(90, percentUnits::pct);
-    ScooperL.rotateFor(-(distance+1300), rotationUnits::deg, false);
-    ScooperR.rotateFor(-(distance+1300), rotationUnits::deg, false);
+    ScooperL.rotateFor(-(distance+1500), rotationUnits::deg, false);
+    ScooperR.rotateFor(-(distance+1500), rotationUnits::deg, false);
   }
   LeftDriveF.setVelocity(speed, percentUnits::pct);
   RightDriveF.setVelocity(speed, percentUnits::pct);
@@ -148,11 +146,11 @@ void strafeX(int distance,int speed)
 //The function to fully expand the robot
 void expand()
 {
-  ArmL.setVelocity(90, percentUnits::pct);
-  ArmR.setVelocity(90, percentUnits::pct);
+  ArmL.setVelocity(100, percentUnits::pct);
+  ArmR.setVelocity(100, percentUnits::pct);
   ArmR.spin(directionType::rev);  
   ArmL.spin(directionType::rev);
-  vexDelay(1400);
+  vexDelay(1300);
   ArmL.stop();
   ArmR.stop();
   ArmL.setVelocity(100, percentUnits::pct);
@@ -214,24 +212,37 @@ void autonomous(void) {
   // Insert autonomous user code here.
   // ..........................................................................
   expand(); //2800
-  move(1200, 60, true);// +250
-  turn(550, 80);
-  move(500, 60, true);// +250
-  move(-1500, 60);
-  turn(550, 80);
-  move(300, 50, true);// +250
-  turn(425, 80);
-  strafe(-250, 50);
-  move(300, 50);
-  ScooperL.setVelocity(90, percentUnits::pct);
-  ScooperR.setVelocity(90, percentUnits::pct);  
+  move(1425, 40, true);// +250
+  move(-1100, 60,true);// +250 
+  //turn(-935, 80);
+  //moveT(550, 60);
+  //ScooperL.setVelocity(90, percentUnits::pct);
+  //ScooperR.setVelocity(90, percentUnits::pct);  
+  //ScooperR.spin(directionType::fwd);  
+  //ScooperL.spin(directionType::fwd);
+  //vexDelay(300);
+  //ScooperL.stop();
+  //ScooperR.stop();  
+  //stack(); //2610
+  //move(-500, 100); 
+/*  */
+  vexDelay(150);
+  strafe(1100, 50); 
+  //turn(83,70);
+  move(900, 40, true);// +250
+  move(-300, 40);// +250
+  turn(-875, 80);
+  moveT(1000, 80,true);
+  ScooperL.setVelocity(60, percentUnits::pct);
+  ScooperR.setVelocity(60, percentUnits::pct);  
   ScooperR.spin(directionType::fwd);  
   ScooperL.spin(directionType::fwd);
-  vexDelay(300);
+  vexDelay(400);
   ScooperL.stop();
   ScooperR.stop();  
   stack(); //2610
-  move(-500, 100);  
+  vexDelay(400);
+  move(-500, 100);
 }
 
 /*---------------------------------------------------------------------------*/
@@ -244,14 +255,13 @@ void autonomous(void) {
 /*  You must modify the code to add your own robot specific commands here.   */
 /*---------------------------------------------------------------------------*/
 
-void usercontrol(void) 
-{
+void usercontrol(void) {
   LeftDriveF.spin(directionType::fwd);
   LeftDriveR.spin(directionType::fwd);
   RightDriveF.spin(directionType::fwd);
   RightDriveR.spin(directionType::fwd); 
   ScooperR.setVelocity(100, percentUnits::pct);
-  ScooperL.setVelocity(100, percentUnits::pct);  
+  ScooperL.setVelocity(100, percentUnits::pct);    
   // User control code here, inside the loop
   while (true)
   {
@@ -260,6 +270,9 @@ void usercontrol(void)
     int  joystickX = Controller.Axis4.position();
     int  StrafeX = Controller.Axis1.position();
     int  StrafeY = Controller.Axis2.position();
+
+   
+
     if ( StrafeX !=0)
     {
      
@@ -286,12 +299,10 @@ void usercontrol(void)
       ArmR.stop();
       ArmL.setBrake(brakeType::hold);
       ArmR.setBrake(brakeType::hold);     
-    }else 
-    {
+    }else {
       ArmL.spin(directionType::fwd);
       ArmR.spin(directionType::fwd);
     }
-
 
 
 
@@ -317,7 +328,6 @@ void usercontrol(void)
       ScooperL.stop();
       ScooperR.stop();
     }
-    
     if (Controller.ButtonUp.pressing())
     {
       double i = 0;

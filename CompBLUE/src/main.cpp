@@ -24,8 +24,8 @@ vex::motor RightDriveF(PORT8,false);
 vex::motor RightDriveR(PORT14,true);
 vex::motor LeftDriveF(PORT1,true);
 vex::motor LeftDriveR(PORT10,false); 
-vex::motor ScooperL(PORT5,true);
-vex::motor ScooperR(PORT2,false);
+vex::motor ScooperL(PORT3,true);
+vex::motor ScooperR(PORT4,false);
 vex::motor ArmL(PORT9, true);
 vex::motor ArmR(PORT11,false);
 /*---------------------------------------------------------------------------*/
@@ -43,8 +43,8 @@ void move(int distance,int speed, bool collect = false)
   {
     ScooperL.setVelocity(90, percentUnits::pct);
     ScooperR.setVelocity(90, percentUnits::pct);
-    ScooperL.rotateFor(-(distance+1300), rotationUnits::deg, false);
-    ScooperR.rotateFor(-(distance+1300), rotationUnits::deg, false);
+    ScooperL.rotateFor(-(distance+1500), rotationUnits::deg, false);
+    ScooperR.rotateFor(-(distance+1500), rotationUnits::deg, false);
   }
   LeftDriveF.setVelocity(speed, percentUnits::pct);
   RightDriveF.setVelocity(speed, percentUnits::pct);
@@ -147,11 +147,11 @@ void strafeX(int distance,int speed)
 //The function to fully expand the robot
 void expand()
 {
-  ArmL.setVelocity(90, percentUnits::pct);
-  ArmR.setVelocity(90, percentUnits::pct);
+  ArmL.setVelocity(100, percentUnits::pct);
+  ArmR.setVelocity(100, percentUnits::pct);
   ArmR.spin(directionType::rev);  
   ArmL.spin(directionType::rev);
-  vexDelay(1400);
+  vexDelay(1300);
   ArmL.stop();
   ArmR.stop();
   ArmL.setVelocity(100, percentUnits::pct);
@@ -330,21 +330,37 @@ void autonomous(void) {
   
   expand(); //2800
   move(1400, 60, true);// +250
-  move(-1075, 90,true);// +250 
-  strafe(850, 85); 
+  move(-1075, 80,true);// +250 
+  //turn(-935, 80);
+  //moveT(550, 60);
+  //ScooperL.setVelocity(90, percentUnits::pct);
+  //ScooperR.setVelocity(90, percentUnits::pct);  
+  //ScooperR.spin(directionType::fwd);  
+  //ScooperL.spin(directionType::fwd);
+  //vexDelay(300);
+  //ScooperL.stop();
+  //ScooperR.stop();  
+  //stack(); //2610
+  //move(-500, 100); 
+/*  */
+  vexDelay(150);
+  strafe(1100, 85); 
   turn(83,70);
-  moveX(800, 60, true);// +250
-  turn(-880, 80);
-  moveT(1400, 80);
-  ScooperL.setVelocity(90, percentUnits::pct);
-  ScooperR.setVelocity(90, percentUnits::pct);  
+  moveX(600, 60, true);// +250
+  turn(-875, 80);
+  moveT(1000, 80,true);
+  ScooperL.setVelocity(60, percentUnits::pct);
+  ScooperR.setVelocity(60, percentUnits::pct);  
   ScooperR.spin(directionType::fwd);  
   ScooperL.spin(directionType::fwd);
-  vexDelay(300);
+  vexDelay(400);
   ScooperL.stop();
   ScooperR.stop();  
   stack(); //2610
+  vexDelay(400);
   move(-500, 100); 
+
+
 }
 
 /*---------------------------------------------------------------------------*/

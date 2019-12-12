@@ -14,8 +14,6 @@
 #include <math.h>
 using namespace vex;
 vex::controller Controller;
-
-
 // A global instance of competition
 competition Competition;
 
@@ -28,6 +26,7 @@ vex::motor ScooperL(PORT3,true);
 vex::motor ScooperR(PORT4,false);
 vex::motor ArmL(PORT9, true);
 vex::motor ArmR(PORT11,false);
+
 /*---------------------------------------------------------------------------*/
 /*                          Pre-Autonomous Functions                         */
 /*                                                                           */
@@ -215,13 +214,13 @@ void autonomous(void) {
   // ..........................................................................
   expand(); //2800
   move(1200, 60, true);// +250
-  turn(550, 80);
+  turn(-550, 80);
   move(500, 60, true);// +250
   move(-1500, 60);
-  turn(550, 80);
+  turn(-550, 80);
   move(300, 50, true);// +250
-  turn(425, 80);
-  strafe(-250, 50);
+  turn(-425, 80);
+  strafe(250, 50);
   move(300, 50);
   ScooperL.setVelocity(90, percentUnits::pct);
   ScooperR.setVelocity(90, percentUnits::pct);  
@@ -244,14 +243,13 @@ void autonomous(void) {
 /*  You must modify the code to add your own robot specific commands here.   */
 /*---------------------------------------------------------------------------*/
 
-void usercontrol(void) 
-{
+void usercontrol(void) {
   LeftDriveF.spin(directionType::fwd);
   LeftDriveR.spin(directionType::fwd);
   RightDriveF.spin(directionType::fwd);
   RightDriveR.spin(directionType::fwd); 
   ScooperR.setVelocity(100, percentUnits::pct);
-  ScooperL.setVelocity(100, percentUnits::pct);  
+  ScooperL.setVelocity(100, percentUnits::pct);   
   // User control code here, inside the loop
   while (true)
   {
