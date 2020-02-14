@@ -69,7 +69,8 @@ int  joystickX;
 int  StrafeX; 
 int  StrafeY;
 
-
+ 
+ 
 
 void move(int distance,int speed, bool collect = false, int tower = 0)
 { 
