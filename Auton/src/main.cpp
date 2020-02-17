@@ -348,17 +348,27 @@ int main()
   
 /**/
   expand();
-  move(180,30,false,1);
+  move(180,30,false,1);//1
   Tower();
   move(-180,20);
-  turn(-190,20);
+  turn(-190,20);//2
   strafe(-90,20);
   move(650,20,true);
   move(-630,20,true);
-  strafe(-510,20);
-  turn(10,30);
+  strafe(-510,20);//3
+  turn(10,30);//4
   move(700,20,true);
   turn(650,30);
   moveT(3000,30,true);
   stack();
+  move(-20,20);//5
+  turn(-570,20);
+  move(180,30,true);
+  move(20,30);
+  Tower();
+  move(-20,20)
+  turn(-570,20);//6
+  move(180,30,true);
+  move(20,30);
+  Tower();
 }
