@@ -53,16 +53,14 @@
 
 using namespace vex;
 
-vex::controller Controller; 
 vex::motor FrontR(PORT13,true); 
-vex::motor FrontL(PORT2,false);
-vex::motor BackR(PORT12,true);
+vex::motor FrontL(PORT3,false);
+vex::motor BackR(PORT15,true);
 vex::motor BackL(PORT1,false); 
 vex::motor CollectorL(PORT17,false);
 vex::motor CollectorR(PORT16,true);
 vex::motor Tilter(PORT14, false);
 vex::motor Arm(PORT11, false);
-vex::inertial Inertial(PORT21);
 
 int  joystickY;
 int  joystickX;
@@ -264,13 +262,13 @@ void strafe(int distance,int speed)
 
 void expand()
 {
-  Tilter.rotateTo(700, rotationUnits::deg, 100, velocityUnits::pct,true);
+  Tilter.rotateTo(740, rotationUnits::deg, 100, velocityUnits::pct,true);
   Tilter.rotateTo(0, rotationUnits::deg, 100, velocityUnits::pct,false);
   vexDelay(300);
   CollectorL.setVelocity(90, percentUnits::pct);
   CollectorR.setVelocity(90, percentUnits::pct);
-  CollectorL.rotateFor(600, rotationUnits::deg, false);
-  CollectorR.rotateFor(600, rotationUnits::deg, false);
+  CollectorL.rotateFor(650, rotationUnits::deg, false);
+  CollectorR.rotateFor(650, rotationUnits::deg, false);
 }
 
 
@@ -282,7 +280,7 @@ void Tower(bool Mid = false)
     CollectorL.setVelocity(70, percentUnits::pct);
     CollectorR.setVelocity(70, percentUnits::pct);
     Arm.rotateTo(2900, rotationUnits::deg, 90, velocityUnits::pct,true);
-    move(200,30,false,2);
+    move(270,30,false,2);
     CollectorL.spin(directionType::rev);
     CollectorR.spin(directionType::rev);
     vexDelay(850);
@@ -322,6 +320,10 @@ void stack()
     FrontR.setVelocity(-0.08*(pow(i,2))+20, percentUnits::pct);
     BackL.setVelocity(-0.08*(pow(i,2))+20, percentUnits::pct);
     BackR.setVelocity(-0.08*(pow(i,2))+20, percentUnits::pct);
+    //if(i == 17)
+    //{
+     
+    //}
     // Lift the storage tray to stack cubes that slows down based on an exponential function
     Tilter.setVelocity(-0.2*(pow(i,2))+90, percentUnits::pct);
     FrontL.spin(directionType::fwd);  
@@ -330,8 +332,9 @@ void stack()
     BackR.spin(directionType::fwd);
     Tilter.spin(directionType::fwd);
     // Keep every new speed for 145 miliseconds
-    vexDelay(120);
-    i += 1;    
+    vexDelay(118);
+    i += 1;   
+ 
   }
   // stop all movement 
   Tilter.stop();
@@ -339,6 +342,7 @@ void stack()
   FrontR.stop();
   BackL.stop();
   BackR.stop();
+    
 }
 
 int main()
@@ -346,37 +350,49 @@ int main()
   // Initializing Robot Configuration. DO NOT REMOVE!
   vexcodeInit();
   
-/*
+
   expand();
   move(180,30,false,1);//1
   Tower();
   move(-180,20);
+
   turn(-190,20);//2
   strafe(-90,20);
   move(650,20,true);
   move(-630,20,true);
   strafe(-510,20);//3
   turn(10,30);//4
-  move(700,20,true); */
-  turn(650,30);
+  move(620,20,true); 
+  turn(630,30);
 
 
   moveT(3000,30,true);
 
   stack();
+  
+  CollectorL.setVelocity(100, percentUnits::pct);
+  CollectorR.setVelocity(100, percentUnits::pct);   
+  CollectorL.spin(directionType::rev);
+  CollectorR.spin(directionType::rev);       
+  vexDelay(100);
+  CollectorL.setVelocity(0, percentUnits::pct);
+  CollectorR.setVelocity(0, percentUnits::pct);
+
+
+  move(-550,50);//5
   Tilter.rotateTo(0, rotationUnits::deg, 100, velocityUnits::pct,false);
 
-  move(-255,15);//5
-  turn(670,15);
-  move(770,20,true);
+  turn(720,15);
+  move(400,20,true);
   move(-125,15);
   Tower(true);
   
-/*s
-  move(-20,15);
-  turn(770,15);//6
-  move(180,20,true);
-  move(20,30);
+
+
+  move(-475,15);
+  turn(380,15);//6
+  move(600,15,true);
+  move(-100,15);
   Tower();
-  */
+  
 }

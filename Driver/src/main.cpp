@@ -16,8 +16,8 @@ using namespace vex;
 
 vex::controller Controller; 
 vex::motor FrontR(PORT13,true); 
-vex::motor FrontL(PORT2,false);
-vex::motor BackR(PORT12,true);
+vex::motor FrontL(PORT3,false);
+vex::motor BackR(PORT15,true);
 vex::motor BackL(PORT1,false); 
 vex::motor CollectorL(PORT17,false);
 vex::motor CollectorR(PORT16,true);
@@ -56,7 +56,6 @@ int main() {
     FrontR.setVelocity(0, percentUnits::pct);
     BackL.setVelocity(0, percentUnits::pct);
     BackR.setVelocity(0, percentUnits::pct);
-
   double i = 0;
   // While loop because I was too lazy to look up for loop syntaxt
   while(i <18)
@@ -84,6 +83,8 @@ int main() {
   BackL.stop();
   BackR.stop();
 */
+  Tilter.rotateTo(700, rotationUnits::deg, 70, velocityUnits::pct,true);
+  Tilter.rotateTo(0, rotationUnits::deg, 100, velocityUnits::pct,false);
 
   while(true)
   {
@@ -161,6 +162,21 @@ Strafe
       Arm.setVelocity(70, percentUnits::pct);
       Arm.rotateFor(-150, rotationUnits::deg, false);
     }
+    if(Controller.ButtonA.pressing())
+    {
+      double i = 0;
+      // While loop because I was too lazy to look up for loop syntaxt
+      while(i <18)
+      {
+        // Move the robot forward slightly based on an exponential function
+
+        // Lift the storage tray to stack cubes that slows down based on an exponential function
+        Tilter.setVelocity(-0.2*(pow(i,2))+90, percentUnits::pct);
+        // Keep every new speed for 145 miliseconds
+        vexDelay(110);
+        i += 1;
+      }
+    }
 
 
 
@@ -176,5 +192,5 @@ Strafe
     {
       Arm.rotateTo(0, rotationUnits::deg, 90, velocityUnits::pct,false);
     }
-  }  
+  }
 }
