@@ -389,9 +389,9 @@ int main()
   
 
 
-  move(-475,15);
-  turn(380,15);//6
-  move(600,15,true);
+  move(-460,15);
+  turn(390,15);//6
+  move(750,15,true);
   move(-100,15);
   Tower();
   
