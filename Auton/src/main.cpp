@@ -55,17 +55,13 @@ using namespace vex;
 
 vex::motor FrontR(PORT13,true); 
 vex::motor FrontL(PORT3,false);
-vex::motor BackR(PORT15,true);
+vex::motor BackR(PORT18,true);
 vex::motor BackL(PORT1,false); 
-vex::motor CollectorL(PORT17,false);
+vex::motor CollectorL(PORT19,false);
 vex::motor CollectorR(PORT16,true);
 vex::motor Tilter(PORT14, false);
 vex::motor Arm(PORT11, false);
 
-int  joystickY;
-int  joystickX;
-int  StrafeX; 
-int  StrafeY;
 
  
  
@@ -78,8 +74,8 @@ void move(int distance,int speed, bool collect = false, int tower = 0)
     {
       CollectorL.setVelocity(90, percentUnits::pct);
       CollectorR.setVelocity(90, percentUnits::pct);
-      CollectorL.rotateFor((distance+2700), rotationUnits::deg, false);
-      CollectorR.rotateFor((distance+2700), rotationUnits::deg, false);
+      CollectorL.rotateFor((distance+3000), rotationUnits::deg, false);
+      CollectorR.rotateFor((distance+3000), rotationUnits::deg, false);
     }
     Arm.rotateTo(0, rotationUnits::deg, 90, velocityUnits::pct,false);
     FrontL.setVelocity(speed, percentUnits::pct);
@@ -101,8 +97,8 @@ void move(int distance,int speed, bool collect = false, int tower = 0)
     {
       CollectorL.setVelocity(90, percentUnits::pct);
       CollectorR.setVelocity(90, percentUnits::pct);
-      CollectorL.rotateFor((distance+2700), rotationUnits::deg, false);
-      CollectorR.rotateFor((distance+2700), rotationUnits::deg, false);
+      CollectorL.rotateFor((distance+3000), rotationUnits::deg, false);
+      CollectorR.rotateFor((distance+3000), rotationUnits::deg, false);
     }
     Arm.rotateTo(2200, rotationUnits::deg, 90, velocityUnits::pct,false);
     FrontL.setVelocity(speed, percentUnits::pct);
@@ -124,8 +120,8 @@ void move(int distance,int speed, bool collect = false, int tower = 0)
     {
       CollectorL.setVelocity(90, percentUnits::pct);
       CollectorR.setVelocity(90, percentUnits::pct);
-      CollectorL.rotateFor((distance+2700), rotationUnits::deg, false);
-      CollectorR.rotateFor((distance+2700), rotationUnits::deg, false);
+      CollectorL.rotateFor((distance+3000), rotationUnits::deg, false);
+      CollectorR.rotateFor((distance+3000), rotationUnits::deg, false);
     }
     Arm.rotateTo(2900, rotationUnits::deg, 90, velocityUnits::pct,false);
     FrontL.setVelocity(speed, percentUnits::pct);
@@ -267,8 +263,8 @@ void expand()
   vexDelay(300);
   CollectorL.setVelocity(90, percentUnits::pct);
   CollectorR.setVelocity(90, percentUnits::pct);
-  CollectorL.rotateFor(650, rotationUnits::deg, false);
-  CollectorR.rotateFor(650, rotationUnits::deg, false);
+  CollectorL.rotateFor(700, rotationUnits::deg, false);
+  CollectorR.rotateFor(700, rotationUnits::deg, false);
 }
 
 
@@ -283,7 +279,7 @@ void Tower(bool Mid = false)
     move(270,30,false,2);
     CollectorL.spin(directionType::rev);
     CollectorR.spin(directionType::rev);
-    vexDelay(850);
+    vexDelay(1000);
     CollectorL.stop();
     CollectorR.stop();
     CollectorL.setBrake(brakeType::hold);
@@ -382,17 +378,17 @@ int main()
   move(-550,50);//5
   Tilter.rotateTo(0, rotationUnits::deg, 100, velocityUnits::pct,false);
 
-  turn(720,15);
+  turn(730,15);
   move(400,20,true);
   move(-125,15);
   Tower(true);
   
 
 
-  move(-460,15);
-  turn(390,15);//6
-  move(750,15,true);
-  move(-100,15);
+  move(-270,15);
+  turn(430,15);//6
+  move(700,20,true);
+  move(-110,15);
   Tower();
   
 }

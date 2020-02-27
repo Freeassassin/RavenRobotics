@@ -17,9 +17,9 @@ using namespace vex;
 vex::controller Controller; 
 vex::motor FrontR(PORT13,true); 
 vex::motor FrontL(PORT3,false);
-vex::motor BackR(PORT15,true);
+vex::motor BackR(PORT18,true);
 vex::motor BackL(PORT1,false); 
-vex::motor CollectorL(PORT17,false);
+vex::motor CollectorL(PORT19,false);
 vex::motor CollectorR(PORT16,true);
 vex::motor Tilter(PORT14, false);
 vex::motor Arm(PORT11, false);
@@ -84,7 +84,7 @@ int main() {
   BackR.stop();
 */
   Tilter.rotateTo(700, rotationUnits::deg, 70, velocityUnits::pct,true);
-  Tilter.rotateTo(0, rotationUnits::deg, 100, velocityUnits::pct,false);
+  Tilter.rotateTo(0, rotationUnits::deg, 100, velocityUnits::pct,true);
 
   while(true)
   {
@@ -191,6 +191,10 @@ Strafe
     else if(Controller.ButtonDown.pressing()) 
     {
       Arm.rotateTo(0, rotationUnits::deg, 90, velocityUnits::pct,false);
+    }
+    else if (Controller.ButtonLeft.pressing())
+    {
+      Arm.rotateTo(1100, rotationUnits::deg, 100, velocityUnits::pct,false);
     }
   }
 }
