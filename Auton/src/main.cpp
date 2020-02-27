@@ -77,7 +77,7 @@ void move(int distance,int speed, bool collect = false, int tower = 0)
       CollectorL.rotateFor((distance+3000), rotationUnits::deg, false);
       CollectorR.rotateFor((distance+3000), rotationUnits::deg, false);
     }
-    Arm.rotateTo(0, rotationUnits::deg, 90, velocityUnits::pct,false);
+    Arm.rotateTo(-2200, rotationUnits::deg, 90, velocityUnits::pct,false);
     FrontL.setVelocity(speed, percentUnits::pct);
     FrontR.setVelocity(speed, percentUnits::pct);
     BackL.setVelocity(speed, percentUnits::pct);
@@ -152,7 +152,7 @@ void moveT(int seconds,int speed, bool collect = false,int tower = 0)
       CollectorL.spin(directionType::fwd);
       CollectorR.spin(directionType::fwd);  
     }
-    Arm.rotateTo(0, rotationUnits::deg, 90, velocityUnits::pct,false);
+    Arm.rotateTo(0, rotationUnits::deg, 90, velocityUnits::pct,false); //change back to 0 when we run through
     FrontL.setVelocity(speed, percentUnits::pct);
     FrontR.setVelocity(speed, percentUnits::pct);
     BackL.setVelocity(speed, percentUnits::pct);
@@ -294,7 +294,7 @@ void Tower(bool Mid = false)
     move(130,30,false,1);
     CollectorL.spin(directionType::rev);
     CollectorR.spin(directionType::rev);
-    vexDelay(850);
+    vexDelay(1000);
     CollectorL.stop();
     CollectorR.stop();
     CollectorL.setBrake(brakeType::hold);
@@ -346,7 +346,7 @@ int main()
   // Initializing Robot Configuration. DO NOT REMOVE!
   vexcodeInit();
   
-
+  
   expand();
   move(180,30,false,1);//1
   Tower();
@@ -362,7 +362,7 @@ int main()
   turn(630,30);
 
 
-  moveT(3000,30,true);
+  moveT(3000,30);
 
   stack();
   
@@ -375,20 +375,45 @@ int main()
   CollectorR.setVelocity(0, percentUnits::pct);
 
 
-  move(-550,50);//5
+  move(-550,40);//5
   Tilter.rotateTo(0, rotationUnits::deg, 100, velocityUnits::pct,false);
 
   turn(730,15);
-  move(400,20,true);
+  move(400,30,true);
   move(-125,15);
   Tower(true);
   
 
 
   move(-270,15);
-  turn(430,15);//6
+  turn(435,15);//6
   move(700,20,true);
-  move(-110,15);
+  move(-107,15);
+    
   Tower();
-  
+
+
+
+
+
+  Arm.rotateTo(0, rotationUnits::deg, 100, velocityUnits::pct,true);
+  strafe(120,20);
+  move(300,20,true);
+  strafe(75,20);
+  move(1500,40,true);
+  turn(300,20);
+  moveT(3000,30);
+
+  stack();
+
+  CollectorL.setVelocity(100, percentUnits::pct);
+  CollectorR.setVelocity(100, percentUnits::pct);   
+  CollectorL.spin(directionType::rev);
+  CollectorR.spin(directionType::rev);       
+  vexDelay(100);
+  CollectorL.setVelocity(0, percentUnits::pct);
+  CollectorR.setVelocity(0, percentUnits::pct);
+  move(-550,100);
+
+
 }

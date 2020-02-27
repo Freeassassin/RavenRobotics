@@ -28,6 +28,7 @@ int  joystickY;
 int  joystickX;
 int  StrafeX; 
 int  StrafeY;
+bool tilting = false;
 
 int main() {
   // Initializing Robot Configuration. DO NOT REMOVE!
@@ -98,6 +99,7 @@ int main() {
     FrontR.setVelocity(joystickY - joystickX/2, percentUnits::pct);
     BackL.setVelocity(joystickY + joystickX/2, percentUnits::pct);
     BackR.setVelocity(joystickY - joystickX/2, percentUnits::pct);
+    
 /*
 Strafe 
     FrontL.setVelocity(joystickY + joystickX/2, percentUnits::pct);
@@ -105,12 +107,15 @@ Strafe
     BackL.setVelocity(joystickY - joystickX/2, percentUnits::pct);
     BackR.setVelocity(joystickY + joystickX/2, percentUnits::pct);
 */
-
-    if( StrafeY != 0 )
+    if (Tilter.rotation(rotationUnits::deg) == 0)
+    {
+      tilting = false;
+    }
+    if( StrafeY != 0 and not tilting)
     {
       Tilter.setVelocity(StrafeY, percentUnits::pct);
     }
-    else 
+    else if(StrafeY == 0 and not tilting)
     {
       Tilter.setVelocity(0, percentUnits::pct);
       Tilter.setBrake(brakeType::hold); 
@@ -176,6 +181,12 @@ Strafe
         vexDelay(110);
         i += 1;
       }
+    }
+    if (Controller.ButtonY.pressing())
+    {
+      Tilter.rotateTo(0, rotationUnits::deg, 100, velocityUnits::pct,false);
+      tilting = true;
+
     }
 
 
