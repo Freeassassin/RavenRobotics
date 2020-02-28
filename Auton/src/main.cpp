@@ -57,7 +57,7 @@ vex::motor FrontR(PORT13,true);
 vex::motor FrontL(PORT3,false);
 vex::motor BackR(PORT18,true);
 vex::motor BackL(PORT1,false); 
-vex::motor CollectorL(PORT19,false);
+vex::motor CollectorL(PORT10,false);
 vex::motor CollectorR(PORT16,true);
 vex::motor Tilter(PORT14, false);
 vex::motor Arm(PORT11, false);
@@ -72,12 +72,12 @@ void move(int distance,int speed, bool collect = false, int tower = 0)
   {
     if(collect)
     {
-      CollectorL.setVelocity(90, percentUnits::pct);
-      CollectorR.setVelocity(90, percentUnits::pct);
+      CollectorL.setVelocity(100, percentUnits::pct);
+      CollectorR.setVelocity(100, percentUnits::pct);
       CollectorL.rotateFor((distance+3000), rotationUnits::deg, false);
       CollectorR.rotateFor((distance+3000), rotationUnits::deg, false);
     }
-    Arm.rotateTo(-2200, rotationUnits::deg, 90, velocityUnits::pct,false);
+    Arm.rotateTo(-2200, rotationUnits::deg, 100, velocityUnits::pct,false);
     FrontL.setVelocity(speed, percentUnits::pct);
     FrontR.setVelocity(speed, percentUnits::pct);
     BackL.setVelocity(speed, percentUnits::pct);
@@ -95,12 +95,12 @@ void move(int distance,int speed, bool collect = false, int tower = 0)
   {
     if(collect)
     {
-      CollectorL.setVelocity(90, percentUnits::pct);
-      CollectorR.setVelocity(90, percentUnits::pct);
+      CollectorL.setVelocity(100, percentUnits::pct);
+      CollectorR.setVelocity(100, percentUnits::pct);
       CollectorL.rotateFor((distance+3000), rotationUnits::deg, false);
       CollectorR.rotateFor((distance+3000), rotationUnits::deg, false);
     }
-    Arm.rotateTo(2200, rotationUnits::deg, 90, velocityUnits::pct,false);
+    Arm.rotateTo(2200, rotationUnits::deg, 100, velocityUnits::pct,false);
     FrontL.setVelocity(speed, percentUnits::pct);
     FrontR.setVelocity(speed, percentUnits::pct);
     BackL.setVelocity(speed, percentUnits::pct);
@@ -118,12 +118,12 @@ void move(int distance,int speed, bool collect = false, int tower = 0)
   {
     if(collect)
     {
-      CollectorL.setVelocity(90, percentUnits::pct);
-      CollectorR.setVelocity(90, percentUnits::pct);
+      CollectorL.setVelocity(100, percentUnits::pct);
+      CollectorR.setVelocity(100, percentUnits::pct);
       CollectorL.rotateFor((distance+3000), rotationUnits::deg, false);
       CollectorR.rotateFor((distance+3000), rotationUnits::deg, false);
     }
-    Arm.rotateTo(2900, rotationUnits::deg, 90, velocityUnits::pct,false);
+    Arm.rotateTo(2900, rotationUnits::deg, 100, velocityUnits::pct,false);
     FrontL.setVelocity(speed, percentUnits::pct);
     FrontR.setVelocity(speed, percentUnits::pct);
     BackL.setVelocity(speed, percentUnits::pct);
@@ -147,12 +147,12 @@ void moveT(int seconds,int speed, bool collect = false,int tower = 0)
   {
     if(collect)
     {
-      CollectorL.setVelocity(90, percentUnits::pct);
-      CollectorR.setVelocity(90, percentUnits::pct);
+      CollectorL.setVelocity(100, percentUnits::pct);
+      CollectorR.setVelocity(100, percentUnits::pct);
       CollectorL.spin(directionType::fwd);
       CollectorR.spin(directionType::fwd);  
     }
-    Arm.rotateTo(0, rotationUnits::deg, 90, velocityUnits::pct,false); //change back to 0 when we run through
+    Arm.rotateTo(0, rotationUnits::deg, 100, velocityUnits::pct,false); //change back to 0 when we run through
     FrontL.setVelocity(speed, percentUnits::pct);
     FrontR.setVelocity(speed, percentUnits::pct);
     BackL.setVelocity(speed, percentUnits::pct);
@@ -174,12 +174,12 @@ void moveT(int seconds,int speed, bool collect = false,int tower = 0)
   {
     if(collect)
     {
-      CollectorL.setVelocity(90, percentUnits::pct);
-      CollectorR.setVelocity(90, percentUnits::pct);
+      CollectorL.setVelocity(100, percentUnits::pct);
+      CollectorR.setVelocity(100, percentUnits::pct);
       CollectorL.spin(directionType::fwd);
       CollectorR.spin(directionType::fwd);  
     }
-    Arm.rotateTo(2200, rotationUnits::deg, 90, velocityUnits::pct,false);
+    Arm.rotateTo(2200, rotationUnits::deg, 100, velocityUnits::pct,false);
     FrontL.setVelocity(speed, percentUnits::pct);
     FrontR.setVelocity(speed, percentUnits::pct);
     BackL.setVelocity(speed, percentUnits::pct);
@@ -201,12 +201,12 @@ void moveT(int seconds,int speed, bool collect = false,int tower = 0)
   {
     if(collect)
     {
-      CollectorL.setVelocity(90, percentUnits::pct);
-      CollectorR.setVelocity(90, percentUnits::pct);
+      CollectorL.setVelocity(100, percentUnits::pct);
+      CollectorR.setVelocity(100, percentUnits::pct);
       CollectorL.spin(directionType::fwd);
       CollectorR.spin(directionType::fwd);  
     }
-    Arm.rotateTo(2900, rotationUnits::deg, 90, velocityUnits::pct,false);
+    Arm.rotateTo(2900, rotationUnits::deg, 100, velocityUnits::pct,false);
     FrontL.setVelocity(speed, percentUnits::pct);
     FrontR.setVelocity(speed, percentUnits::pct);
     BackL.setVelocity(speed, percentUnits::pct);
@@ -228,7 +228,7 @@ void moveT(int seconds,int speed, bool collect = false,int tower = 0)
 
 
 
-void turn(int distance,int speed)
+void turn(int distance,int speed, bool collect = false)
 {
   FrontL.setVelocity(speed, percentUnits::pct);
   FrontR.setVelocity(speed, percentUnits::pct);
@@ -237,7 +237,13 @@ void turn(int distance,int speed)
   FrontL.rotateFor(distance, rotationUnits::deg, false);
   FrontR.rotateFor(-distance, rotationUnits::deg, false);
   BackL.rotateFor(distance, rotationUnits::deg, false);
-  BackR.rotateFor(-distance, rotationUnits::deg, true);  
+  BackR.rotateFor(-distance, rotationUnits::deg, true); 
+  if (collect){
+    CollectorL.setVelocity(100, percentUnits::pct);
+    CollectorR.setVelocity(100, percentUnits::pct);
+    CollectorL.rotateFor((distance+3000), rotationUnits::deg, false);
+    CollectorR.rotateFor((distance+3000), rotationUnits::deg, false);  
+  } 
 }
 
 
@@ -258,13 +264,13 @@ void strafe(int distance,int speed)
 
 void expand()
 {
-  Tilter.rotateTo(740, rotationUnits::deg, 100, velocityUnits::pct,true);
+  Tilter.rotateTo(760, rotationUnits::deg, 100, velocityUnits::pct,true);
   Tilter.rotateTo(0, rotationUnits::deg, 100, velocityUnits::pct,false);
   vexDelay(300);
   CollectorL.setVelocity(90, percentUnits::pct);
   CollectorR.setVelocity(90, percentUnits::pct);
-  CollectorL.rotateFor(700, rotationUnits::deg, false);
-  CollectorR.rotateFor(700, rotationUnits::deg, false);
+  CollectorL.rotateFor(800, rotationUnits::deg, false);
+  CollectorR.rotateFor(800, rotationUnits::deg, false);
 }
 
 
@@ -312,14 +318,10 @@ void stack()
   while(i <18)
   {
     // Move the robot forward slightly based on an exponential function
-    FrontL.setVelocity(-0.08*(pow(i,2))+20, percentUnits::pct);
-    FrontR.setVelocity(-0.08*(pow(i,2))+20, percentUnits::pct);
-    BackL.setVelocity(-0.08*(pow(i,2))+20, percentUnits::pct);
-    BackR.setVelocity(-0.08*(pow(i,2))+20, percentUnits::pct);
-    //if(i == 17)
-    //{
-     
-    //}
+    FrontL.setVelocity(-0.08*(pow(i,2))+25, percentUnits::pct);
+    FrontR.setVelocity(-0.08*(pow(i,2))+25, percentUnits::pct);
+    BackL.setVelocity(-0.08*(pow(i,2))+25, percentUnits::pct);
+    BackR.setVelocity(-0.08*(pow(i,2))+25, percentUnits::pct);
     // Lift the storage tray to stack cubes that slows down based on an exponential function
     Tilter.setVelocity(-0.2*(pow(i,2))+90, percentUnits::pct);
     FrontL.spin(directionType::fwd);  
@@ -352,17 +354,18 @@ int main()
   Tower();
   move(-180,20);
 
-  turn(-190,20);//2
+  turn(-190,25);//2
   strafe(-90,20);
   move(650,20,true);
   move(-630,20,true);
   strafe(-510,20);//3
   turn(10,30);//4
   move(620,20,true); 
-  turn(630,30);
+  turn(630,30,true);
 
 
-  moveT(3000,30);
+  moveT(3000,35);
+
 
   stack();
   
@@ -378,17 +381,17 @@ int main()
   move(-550,40);//5
   Tilter.rotateTo(0, rotationUnits::deg, 100, velocityUnits::pct,false);
 
-  turn(730,15);
-  move(400,30,true);
-  move(-125,15);
+  turn(730,30);
+  move(450,30,true);
+  move(-170,20);
   Tower(true);
   
 
 
   move(-270,15);
-  turn(435,15);//6
-  move(700,20,true);
-  move(-107,15);
+  turn(435,30);//6
+  move(690,30,true);
+  move(-112,15);
     
   Tower();
 
@@ -397,12 +400,14 @@ int main()
 
 
   Arm.rotateTo(0, rotationUnits::deg, 100, velocityUnits::pct,true);
-  strafe(120,20);
+  strafe(140,20);
   move(300,20,true);
-  strafe(75,20);
-  move(1500,40,true);
-  turn(300,20);
-  moveT(3000,30);
+  strafe(140,20);
+  move(400,20,true);
+  strafe(-70,20);
+  move(1100,40,true);
+  turn(300,30);
+  moveT(1000,30);
 
   stack();
 

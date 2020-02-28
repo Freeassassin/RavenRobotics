@@ -19,7 +19,7 @@ vex::motor FrontR(PORT13,true);
 vex::motor FrontL(PORT3,false);
 vex::motor BackR(PORT18,true);
 vex::motor BackL(PORT1,false); 
-vex::motor CollectorL(PORT19,false);
+vex::motor CollectorL(PORT10,false);
 vex::motor CollectorR(PORT16,true);
 vex::motor Tilter(PORT14, false);
 vex::motor Arm(PORT11, false);
@@ -107,7 +107,7 @@ Strafe
     BackL.setVelocity(joystickY - joystickX/2, percentUnits::pct);
     BackR.setVelocity(joystickY + joystickX/2, percentUnits::pct);
 */
-    if (Tilter.rotation(rotationUnits::deg) == 0)
+    if (Tilter.rotation(rotationUnits::deg) <= 10)
     {
       tilting = false;
     }
@@ -201,11 +201,11 @@ Strafe
     }
     else if(Controller.ButtonDown.pressing()) 
     {
-      Arm.rotateTo(0, rotationUnits::deg, 90, velocityUnits::pct,false);
+      Arm.rotateTo(0, rotationUnits::deg, 100, velocityUnits::pct,false);
     }
     else if (Controller.ButtonLeft.pressing())
     {
-      Arm.rotateTo(1100, rotationUnits::deg, 100, velocityUnits::pct,false);
+      Arm.rotateTo(1200, rotationUnits::deg, 100, velocityUnits::pct,false);
     }
   }
 }
