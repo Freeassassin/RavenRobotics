@@ -369,7 +369,7 @@ int main()
   move(-550,50);//5
   Tilter.rotateTo(0, rotationUnits::deg, 100, velocityUnits::pct,false);
 
-  turn(740,15);
+  turn(720,15);
   move(400,20,true);
   move(-122,15);
   Tower(true);
