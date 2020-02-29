@@ -15,11 +15,11 @@
 using namespace vex;
 
 vex::controller Controller; 
-vex::motor FrontR(PORT13,true); 
+vex::motor FrontR(PORT4,true); 
 vex::motor FrontL(PORT3,false);
 vex::motor BackR(PORT18,true);
 vex::motor BackL(PORT1,false); 
-vex::motor CollectorL(PORT10,false);
+vex::motor CollectorL(PORT9,false);
 vex::motor CollectorR(PORT16,true);
 vex::motor Tilter(PORT14, false);
 vex::motor Arm(PORT11, false);
@@ -107,7 +107,7 @@ Strafe
     BackL.setVelocity(joystickY - joystickX/2, percentUnits::pct);
     BackR.setVelocity(joystickY + joystickX/2, percentUnits::pct);
 */
-    if (Tilter.rotation(rotationUnits::deg) <= 10)
+    if (Tilter.rotation(rotationUnits::deg) <= 22)
     {
       tilting = false;
     }
@@ -178,13 +178,13 @@ Strafe
         // Lift the storage tray to stack cubes that slows down based on an exponential function
         Tilter.setVelocity(-0.2*(pow(i,2))+90, percentUnits::pct);
         // Keep every new speed for 145 miliseconds
-        vexDelay(110);
+        vexDelay(108);
         i += 1;
       }
     }
     if (Controller.ButtonY.pressing())
     {
-      Tilter.rotateTo(0, rotationUnits::deg, 100, velocityUnits::pct,false);
+      Tilter.rotateTo(20, rotationUnits::deg, 100, velocityUnits::pct,false);
       tilting = true;
 
     }
