@@ -310,14 +310,14 @@ void stack()
      
     //}
     // Lift the storage tray to stack cubes that slows down based on an exponential function
-    Tilter.setVelocity(-0.18*(pow(i,2))+85, percentUnits::pct);
+    Tilter.setVelocity(-0.16*(pow(i,2))+85, percentUnits::pct);
     FrontL.spin(directionType::fwd);  
     FrontR.spin(directionType::fwd);
     BackL.spin(directionType::fwd);
     BackR.spin(directionType::fwd);
     Tilter.spin(directionType::fwd);
     // Keep every new speed for 145 miliseconds
-    vexDelay(120);
+    vexDelay(121);
     i += 1;   
  
   }
@@ -349,7 +349,7 @@ int main()
   move(-630,20,true);
   strafe(-510,20);//3
   turn(10,30);//4
-  move(620,20,true); 
+  move(615,20,true); 
   turn(630,30);
 
 
@@ -369,7 +369,7 @@ int main()
   move(-550,50);//5
   Tilter.rotateTo(0, rotationUnits::deg, 100, velocityUnits::pct,false);
 
-  turn(720,15);
+  turn(723,15);
   move(400,20,true);
   move(-122,15);
   Tower(true);
@@ -378,32 +378,18 @@ int main()
 
   move(-270,15);
   turn(450,15);//6
-  move(700,20,true);
-  move(-110,15);
+  move(695,20,true);
+  move(-130,15);
   Tower();
 
 
   Arm.rotateTo(0, rotationUnits::deg, 100, velocityUnits::pct,true);
   
-  strafe(200,40);
-  move(300,20,true);
-  strafe(150,40);
-  move(400,40,true);
-  strafe(-100,40);
-  move(1100,40,true);
-  turn(300,30);
-  moveT(1000,40);
+  move(-100,100,true);
+  strafe(200,100);
+  moveT(1000,100);
+  move(-100,100);
 
-  stack();
-
-  CollectorL.setVelocity(100, percentUnits::pct);
-  CollectorR.setVelocity(100, percentUnits::pct);   
-  CollectorL.spin(directionType::rev);
-  CollectorR.spin(directionType::rev);       
-  vexDelay(100);
-  CollectorL.setVelocity(0, percentUnits::pct);
-  CollectorR.setVelocity(0, percentUnits::pct);
-  move(-550,100);
 
 
 }
