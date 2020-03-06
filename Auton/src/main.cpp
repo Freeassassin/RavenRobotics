@@ -247,9 +247,14 @@ void strafe(int distance,int speed)
 
 void expand()
 {
-  Tilter.rotateTo(740, rotationUnits::deg, 100, velocityUnits::pct,true);
+  Tilter.rotateTo(800, rotationUnits::deg, 100, velocityUnits::pct,false);
+  Tilter.rotateTo(1600, rotationUnits::deg, 100, velocityUnits::pct,true);
   Tilter.rotateTo(0, rotationUnits::deg, 100, velocityUnits::pct,false);
-  vexDelay(300);
+  Tilter.spin(directionType::fwd);
+
+  vexDelay(450);
+  Tilter.rotateTo(0, rotationUnits::deg, 100, velocityUnits::pct,false);
+
   CollectorL.setVelocity(90, percentUnits::pct);
   CollectorR.setVelocity(90, percentUnits::pct);
   CollectorL.rotateFor(700, rotationUnits::deg, false);
@@ -310,7 +315,6 @@ void stack()
      
     //}
     // Lift the storage tray to stack cubes that slows down based on an exponential function
-    Tilter.setVelocity(-0.16*(pow(i,2))+85, percentUnits::pct);
     FrontL.spin(directionType::fwd);  
     FrontR.spin(directionType::fwd);
     BackL.spin(directionType::fwd);
@@ -344,13 +348,13 @@ int main()
   move(-180,20);
 
   turn(-190,20);//2
-  strafe(-90,20);
+  strafe(-83,20);
   move(650,20,true);
   move(-630,20,true);
   strafe(-510,20);//3
   turn(10,30);//4
   move(615,20,true); 
-  turn(630,30);
+  turn(620,30);
 
 
   moveT(3000,30,true);
